@@ -17,6 +17,7 @@ namespace ISS_App
         public HomePage()
         {
             InitializeComponent();
+            GetAPI();
         }
 
         public async void GetAPI()
@@ -25,14 +26,19 @@ namespace ISS_App
             var response = await client.GetAsync("https://api.wheretheiss.at/v1/satellites/25544");
             var responseString = await response.Content.ReadAsStringAsync();
             LocationAPI = JsonConvert.DeserializeObject<WhereTheISSAPI.Rootobject>(responseString);
+            RefreshUI();
         }
 
         private void buttonRefresh_Clicked(object sender, EventArgs e)
         {
+            
             GetAPI();
+        }
+
+        private void RefreshUI()
+        {
             labelLat.Text = LocationAPI.latitude.ToString();
             labelLong.Text = LocationAPI.longitude.ToString();
-
         }
     }
 }

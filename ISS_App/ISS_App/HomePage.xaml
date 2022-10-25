@@ -2,9 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ISS_App.HomePage"
-             Title="Home">
+             
+             IconImageSource="iss">
     <ContentPage.Content>
-        <Grid>
+        <Grid BackgroundColor="#36393f">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
