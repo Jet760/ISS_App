@@ -4,10 +4,29 @@
              x:Class="ISS_App.HomePage"
              Title="Home">
     <ContentPage.Content>
-        <StackLayout BackgroundColor="Green">
-            <Label Text="Welcome to Xamarin.Forms!"
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+        <StackLayout BackgroundColor="Green" Grid.Row="0">
+            <Label Text="LOCATION LAT:"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+            <Label x:Name="labelLat" Text=""
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
         </StackLayout>
+        <StackLayout BackgroundColor="Green" Grid.Row="1">
+            <Label Text="LOCATION Long:"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+            <Label x:Name="labelLong" Text=""
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+        </StackLayout>
+            <Button x:Name="buttonRefresh" Text="Refresh" Grid.Row="3" Clicked="buttonRefresh_Clicked"/>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

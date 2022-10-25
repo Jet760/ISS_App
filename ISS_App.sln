@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISS_App.Android", "ISS_App\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISS_App.iOS", "ISS_App\ISS_App.iOS\ISS_App.iOS.csproj", "{BAB15168-2AAF-47AC-83E9-0F1172F68636}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISS_App", "ISS_App\ISS_App\ISS_App.csproj", "{3B1D7D3A-AFCD-40B3-A3F3-F3302DD4E8AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ISS_App", "ISS_App\ISS_App\ISS_App.csproj", "{3B1D7D3A-AFCD-40B3-A3F3-F3302DD4E8AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
