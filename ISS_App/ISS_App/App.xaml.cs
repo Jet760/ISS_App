@@ -10,7 +10,7 @@ namespace ISS_App
         {
             InitializeComponent();
 
-            MainPage = new HomePage();
+            MainPage = new NavTab();
         }
 
         protected override void OnStart()

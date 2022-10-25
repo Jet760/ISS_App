@@ -2,23 +2,20 @@
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:local="clr-namespace:ISS_App;assembly=ISS_App"
-            x:Class="ISS_App.NavTab"
-            NavigationPage.HasNavigationBar="False"
             BarBackgroundColor="Black"
             SelectedTabColor="White"
             UnselectedTabColor="Blue"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             android:TabbedPage.ToolbarPlacement="Top"
-            android:TabbedPage.IsSwipePagingEnabled="True"
-            >
+            x:Class="ISS_App.NavTab">
+    <TabbedPage.Children>
+        <local:HomePage />
+        <local:AstronautsPage />
+        <local:LiveStreamPage />
+        <local:NotificationsPage />
+        <local:SettingsPage />
+    </TabbedPage.Children>
     
-    
-
-    <local:HomePage />
-    <local:AstronautsPage />
-    <local:LiveStreamPage />
-    <local:NotificationsPage />
-    <local:SettingsPage Title="Settings" IconImageSource="cog"/>
 
 </TabbedPage>
     
