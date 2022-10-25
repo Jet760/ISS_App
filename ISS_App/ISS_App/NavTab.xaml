@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ISS_App.NavTab"
+            xmlns:local="clr-namespace:ISS_App"
+            NavigationPage.HasNavigationBar="False"
+            BarBackgroundColor="Black"
+            SelectedTabColor="White"
+            UnselectedTabColor="Blue"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.ToolbarPlacement="Top"
+            >
+
+    
+    <local:HomePage Title="Home" IconImageSource="home"/>
+    <local:AstronautsPage Title="Astronauts" IconImageSource="astronaut"/>
+    <local:LiveStreamPage Title="LiveStream" IconImageSource="video"/>
+    <local:NotificationsPage Title="Notifications" IconImageSource="bell"/>
+    <local:SettingsPage Title="Settings" IconImageSource="cog"/>
+
+</TabbedPage>
+    
