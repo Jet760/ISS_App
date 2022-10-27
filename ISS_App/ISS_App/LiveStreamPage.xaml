@@ -24,7 +24,6 @@
                     <Label x:Name="labelExplination" Text=""
                     VerticalOptions="CenterAndExpand" 
                     HorizontalOptions="CenterAndExpand" TextColor="#B9BBBE" />
-
                 </ScrollView>
             </StackLayout>
         

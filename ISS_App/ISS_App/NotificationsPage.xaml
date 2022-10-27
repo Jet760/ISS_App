@@ -4,10 +4,21 @@
              x:Class="ISS_App.NotificationsPage"
              IconImageSource="bell">
     <ContentPage.Content>
-        <StackLayout BackgroundColor="Purple">
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid BackgroundColor="#383838" HorizontalOptions="FillAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="9*" />
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackLayout Grid.Column="1">
+                <StackLayout Orientation="Horizontal" Padding="15" HorizontalOptions="Center">
+                    <Button x:Name="buttonAddNewNotif" Text="Add New Location Notification" TextColor="White" Pressed="buttonAddNewNotif_Pressed" BackgroundColor="#484848"/>
+                </StackLayout>
+                <ScrollView >
+                    <StackLayout x:Name="stackLayoutLocationNotifs"  Spacing="20">
+                    </StackLayout>
+                </ScrollView>
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

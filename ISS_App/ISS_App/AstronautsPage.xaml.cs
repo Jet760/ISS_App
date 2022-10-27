@@ -36,10 +36,14 @@ namespace ISS_App
 
         public void PopulateUI()
         {
+            int peopleCounter = 0;
             foreach (PeopleInSpaceAPI.Person astro in AstronautAPI.people)
             {
-                stackLayoutAstronauts.Children.Add(new Label { Text = astro.name });
+                stackLayoutAstronauts.Children.Add(new AstronautView(astro.name, astro.craft));
+                peopleCounter++;
+
             }
+            labelNumberOfPeople.Text = peopleCounter.ToString();
         }
     }
 }
