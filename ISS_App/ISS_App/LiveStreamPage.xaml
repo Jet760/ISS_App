@@ -18,7 +18,7 @@
             <WebView Source="https://ustream.tv/embed/17074538" VerticalOptions="FillAndExpand" Grid.Row="2"/>
             <Label Text="Astronomy Picture of the Day" Grid.Row="3" FontSize="Large" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="White"/>
             <WebView x:Name="webViewPicOfTheDay" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.Row="4" BackgroundColor="#383838"/>
-            <Image x:Name="imagePicOfTheDay" Grid.Row="4"  BackgroundColor="#383838"/> 
+            <Image x:Name="imagePicOfTheDay" Grid.Row="4" /> 
             <StackLayout Grid.Row="5" >
                 <ScrollView VerticalOptions="FillAndExpand">
                     <Label x:Name="labelExplination" Text=""

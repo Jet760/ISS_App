@@ -17,9 +17,59 @@ namespace ISS_App
             InitializeComponent();
         }
 
-        private void buttonAddNewNotif_Pressed(object sender, EventArgs e)
+        private async void buttonAddNewNotif_Pressed(object sender, EventArgs e)
         {
-            stackLayoutLocationNotifs.Children.Add(new NotificationView("moon", "3", "5", "house_white"));
+
+            string name = await DisplayPromptAsync("Add New Location", "Please enter the name of the new location ", maxLength: 20);
+            if (name != null && name != "")
+            {
+                string latitude = await DisplayPromptAsync("Add New Location", "Please enter latitiude ", keyboard: Keyboard.Numeric, maxLength: 8);
+                if (latitude != null && latitude != "")
+                {
+                    string longitude = await DisplayPromptAsync("Add New Location", "Please enter longitude ", keyboard: Keyboard.Numeric, maxLength: 8);
+                    if (longitude != null && latitude != "")
+                    {
+                        string iconOutput = await DisplayActionSheet("Select icon:", "Cancel", null, "House", "Pin", "Globe", "Marker", "Tree", "Heart", "Horse");
+                        if (iconOutput != null)
+                        {
+                            // TO DO: make it so these are black or white depending on colour mode
+                            string icon = "";
+                            switch (iconOutput){
+                                case "House":
+                                    icon = "house_white";
+                                    break;
+                                case "Pin":
+                                    icon = "pin_white";
+                                    break;
+                                case "Globe":
+                                    icon = "world_white";
+                                    break;
+                                case "Marker":
+                                    icon = "drop_white";
+                                    break;
+                                case "Tree":
+                                    icon = "tree_white";
+                                    break;
+                                case "Heart":
+                                    icon = "heart_white";
+                                    break;
+                                case "Horse":
+                                    icon = "horse_white";
+                                    break;
+                                default:
+                                    icon = "house_white";
+                                    break;
+
+                            }
+                            stackLayoutLocationNotifs.Children.Add(new NotificationView(name, latitude, longitude, icon));
+                            
+                        }
+                        
+                    }
+                }
+            }
+            
+            
         }
     }
 }

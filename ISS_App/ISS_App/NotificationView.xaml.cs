@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Plugin.LocalNotification;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -19,6 +19,21 @@ namespace ISS_App
             labelLatitude.Text = latitude;
             labelLongitude.Text = longitude;
             imageLocationNotifIcon.Source = iconSource;
+            
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            //stackLayoutLocationNotifs.Children.Remove(labelLocationName);//
+            NotificationRequest notification = new NotificationRequest
+            {
+                BadgeNumber = 1,
+                Description = "The ISS is passing over {location name}",
+                Title = "ISS Passover",
+                NotificationId = 1
+            };
+            LocalNotificationCenter.Current.Show(notification);
+            return;
         }
     }
 }

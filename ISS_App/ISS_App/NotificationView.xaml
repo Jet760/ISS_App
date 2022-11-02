@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ISS_App.NotificationView">
   <ContentView.Content>
-        <Frame CornerRadius="15" BackgroundColor="#484848" Padding="0">
+        <Frame CornerRadius="15" BackgroundColor="#484848" Padding="0" >
             <StackLayout Padding="20">
                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                     <Image x:Name="imageLocationNotifIcon" />
@@ -26,7 +26,7 @@
                         <Label Text="Notifications: " TextColor="White" FontSize="Medium" Padding="5"/>
                         <Switch x:Name="switchNotifications" Scale="1.3" VerticalOptions="Center" OnColor="#C269C5" ThumbColor="White" />
                     </StackLayout>
-                    <Button Text="Delete location" TextColor="White" BackgroundColor="#484848" BorderColor="#B9BBBE" BorderWidth="1" Margin="20"/>
+                    <Button Text="Delete location" TextColor="White" BackgroundColor="#484848" BorderColor="#B9BBBE" BorderWidth="1" Margin="20" Clicked="Button_Clicked"/>
                 </StackLayout>
             </StackLayout>
         </Frame>
