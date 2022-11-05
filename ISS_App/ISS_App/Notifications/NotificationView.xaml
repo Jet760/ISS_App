@@ -5,8 +5,8 @@
   <ContentView.Content>
         <Frame CornerRadius="15" BackgroundColor="#484848" Padding="0" >
             <StackLayout Padding="20">
-                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                    <Image x:Name="imageLocationNotifIcon" />
+                <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" Spacing="20">
+                    <Image x:Name="imageLocationNotifIcon" HorizontalOptions="Start" />
                     <Label x:Name="labelLocationName" TextColor="White" FontSize="Large"/>
                 </StackLayout>
                 <StackLayout>

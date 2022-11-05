@@ -34,14 +34,15 @@ namespace ISS_App
                 
                 if (pictureAPI.media_type == "image")
                 {
-                Color backGround = new Color(56, 56, 56);
+                
                     imagePicOfTheDay.Source = pictureAPI.url;
-                imagePicOfTheDay.BackgroundColor = backGround;
+                imagePicOfTheDay.Opacity = 100;
 
-                }
+            }
             else
             {
                 webViewPicOfTheDay.Source = pictureAPI.url;
+                imagePicOfTheDay.Opacity = 0;
             }
                 labelExplination.Text = pictureAPI.explanation;
         }

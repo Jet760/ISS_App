@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ISS_App
+namespace ISS_App.Home
 {
     internal class WhereTheISSAPI
     {
