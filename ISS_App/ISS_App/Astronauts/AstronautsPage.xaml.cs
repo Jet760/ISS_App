@@ -15,30 +15,21 @@ namespace ISS_App
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AstronautsPage : ContentPage
     {
-        PeopleInSpaceAPI.Rootobject AstronautAPI = new PeopleInSpaceAPI.Rootobject();
+        AstronautsController controller = new AstronautsController();
+
         public AstronautsPage()
         {
             InitializeComponent();
-            GetAPI();
+            PopulateUI();
             
         }
-        public async void GetAPI()
-        {
-            var client = new HttpClient();
-            var response = await client.GetAsync("http://api.open-notify.org/astros.json");
-            var responseString = await response.Content.ReadAsStringAsync();
-            AstronautAPI = JsonConvert.DeserializeObject<PeopleInSpaceAPI.Rootobject>(responseString);
-            if(AstronautAPI.message != null)
-            {
-                Console.WriteLine("CALLED API");
-            }
-            PopulateUI();
-        }
+        
 
         public void PopulateUI()
         {
+            PeopleInSpaceAPI.Person[] peopleList = controller.GetPeopleList();
             int peopleCounter = 0;
-            foreach (PeopleInSpaceAPI.Person astro in AstronautAPI.people)
+            foreach (PeopleInSpaceAPI.Person astro in peopleList)
             {
                 stackLayoutAstronauts.Children.Add(new AstronautView(astro.name, astro.craft));
                 peopleCounter++;
