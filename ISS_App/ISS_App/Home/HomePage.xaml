@@ -7,28 +7,34 @@
     <ContentPage.Content>
         <Grid BackgroundColor="#36393f">
             <Grid.RowDefinitions>
-                <RowDefinition Height="4*"/>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.5*"/>
             </Grid.RowDefinitions>
-            <maps:Map Grid.Row="0"/>
-            <StackLayout BackgroundColor="Green" Grid.Row="1">
-            <Label Text="LOCATION LAT:"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-            <Label x:Name="labelLat" Text=""
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-        <StackLayout BackgroundColor="Green" Grid.Row="1">
-            <Label Text="LOCATION Long:"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-            <Label x:Name="labelLong" Text=""
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-            <Button x:Name="buttonRefresh" Text="Refresh" Grid.Row="3" Clicked="buttonRefresh_Clicked"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <maps:Map x:Name="mapHomeMap" Grid.Row="0" Grid.ColumnSpan="2" MapType="Hybrid"/>
+            <Label Text="Internation Space Station Live Tracker" TextColor="White" FontSize="19" Grid.Row="1" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <StackLayout Orientation="Horizontal" Grid.Row="2" Grid.Column="0" HorizontalOptions="Center">
+                <Label Text="Latitude: " FontSize="18" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
+                <Label x:Name="labelLatitude" FontSize="16" TextColor="White" HorizontalOptions="Start" VerticalOptions="Center"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Grid.Row="2" Grid.Column="1" HorizontalOptions="Start">
+                <Label Text=" Longitude: " FontSize="18" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
+                <Label x:Name="labelLongitude" FontSize="16" TextColor="White" HorizontalOptions="Start" VerticalOptions="Center"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Grid.Row="3" Grid.Column="0" HorizontalOptions="Center">
+                <Label Text="Altitude: " FontSize="18" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
+                <Label x:Name="labelAltitude" FontSize="16" TextColor="White" HorizontalOptions="Start" VerticalOptions="Center"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Grid.Row="3" Grid.Column="1" HorizontalOptions="Start">
+                <Label Text=" Velocity: " FontSize="18" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
+                <Label x:Name="labelVelocity" FontSize="16" TextColor="White" HorizontalOptions="Start" VerticalOptions="Center"/>
+            </StackLayout>
+            <Button x:Name="buttonRefresh" Text="Refresh" Grid.Row="1" Clicked="buttonRefresh_Clicked"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
