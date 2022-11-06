@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
+using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
 namespace ISS_App
 {
@@ -15,11 +16,23 @@ namespace ISS_App
     public partial class HomePage : ContentPage
     {
         WhereTheISSAPI.Rootobject LocationAPI = new WhereTheISSAPI.Rootobject();
+
+        Pin pin = new Pin
+        {
+            Label = "Internation Space Station",
+            Type = PinType.Generic,
+            Position = new Position(0, 0)
+
+        };
         public HomePage()
         {
             InitializeComponent();
+            mapHomeMap.Pins.Add(pin);
             GetAPI();
+            
         }
+
+        
 
         public async void GetAPI()
         {
@@ -36,10 +49,21 @@ namespace ISS_App
             GetAPI();
         }
 
+       
+
         private void RefreshUI()
         {
-            labelLat.Text = LocationAPI.latitude.ToString();
-            labelLong.Text = LocationAPI.longitude.ToString();
+            double latitude = LocationAPI.latitude;
+            double longitude = LocationAPI.longitude;
+            Position issPosition = new Position(latitude, longitude);
+            pin.Position = issPosition;
+            pin.Address = $"Altitude: {LocationAPI.altitude}  Velocity: {LocationAPI.velocity}";
+            mapHomeMap.MoveToRegion(MapSpan.FromCenterAndRadius(issPosition, Distance.FromKilometers(2000)));
+            labelLatitude.Text = Math.Round(latitude,4).ToString();
+            labelLongitude.Text = Math.Round(longitude, 4).ToString();
+            labelAltitude.Text = LocationAPI.altitude.ToString();
+            labelVelocity.Text = LocationAPI.velocity.ToString();
+
         }
     }
 }
