@@ -15,7 +15,8 @@ namespace ISS_App
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomePage : ContentPage
     {
-        WhereTheISSAPI.Rootobject LocationAPI = new WhereTheISSAPI.Rootobject();
+        HomeController controller = new HomeController();
+        bool autoUpdate = true;
 
         Pin pin = new Pin
         {
@@ -28,41 +29,45 @@ namespace ISS_App
         {
             InitializeComponent();
             mapHomeMap.Pins.Add(pin);
-            GetAPI();
+            RefreshUI();
+            AutoUpdateUI();
+            if (autoUpdate)
+            {
+                buttonRefresh.IsVisible = false;
+            }
             
         }
 
-        
-
-        public async void GetAPI()
-        {
-            var client = new HttpClient();
-            var response = await client.GetAsync("https://api.wheretheiss.at/v1/satellites/25544");
-            var responseString = await response.Content.ReadAsStringAsync();
-            LocationAPI = JsonConvert.DeserializeObject<WhereTheISSAPI.Rootobject>(responseString);
-            RefreshUI();
-        }
 
         private void buttonRefresh_Clicked(object sender, EventArgs e)
         {
-            
-            GetAPI();
+            RefreshUI();
         }
 
-       
+        private async void AutoUpdateUI()
+        {
+            while (autoUpdate)
+            {
+                await Task.Delay(6000);
+                RefreshUI();
+            };
+        }
 
         private void RefreshUI()
         {
-            double latitude = LocationAPI.latitude;
-            double longitude = LocationAPI.longitude;
-            Position issPosition = new Position(latitude, longitude);
-            pin.Position = issPosition;
-            pin.Address = $"Altitude: {LocationAPI.altitude}  Velocity: {LocationAPI.velocity}";
-            mapHomeMap.MoveToRegion(MapSpan.FromCenterAndRadius(issPosition, Distance.FromKilometers(2000)));
-            labelLatitude.Text = Math.Round(latitude,4).ToString();
-            labelLongitude.Text = Math.Round(longitude, 4).ToString();
-            labelAltitude.Text = LocationAPI.altitude.ToString();
-            labelVelocity.Text = LocationAPI.velocity.ToString();
+
+                double latitude = controller.GetLatitude();
+                double longitude = controller.GetLongitude();
+                double altitude = controller.GetAltitude();
+                double velocity = controller.GetVelocity();
+                Position issPosition = new Position(latitude, longitude);
+                pin.Position = issPosition;
+                pin.Address = $"Altitude: {Math.Round(altitude, 6)}  Velocity: {Math.Round(velocity, 6)}";
+                mapHomeMap.MoveToRegion(MapSpan.FromCenterAndRadius(issPosition, Distance.FromKilometers(4000)));
+                labelLatitude.Text = Math.Round(latitude, 4).ToString();
+                labelLongitude.Text = Math.Round(longitude, 4).ToString();
+                labelAltitude.Text = Math.Round(altitude, 4).ToString();
+                labelVelocity.Text = Math.Round(velocity, 4).ToString();
 
         }
     }
