@@ -19,16 +19,21 @@ namespace ISS_App
         public NotificationsPage()
         {
             InitializeComponent();
+            controller.StartUpAsync();
             
         }
 
         public async Task UpdateUIAsync()
         {
             List<NotificationClass.Notification> notifList = await controller.GetNotifListAsync();
-            foreach (NotificationClass.Notification location in notifList)
+            if (notifList != null)
             {
-                stackLayoutLocationNotifs.Children.Add(new NotificationView(location.name, location.latitude, location.longitude, location.icon));
+                foreach (NotificationClass.Notification location in notifList)
+                {
+                    stackLayoutLocationNotifs.Children.Add(new NotificationView(location.name, location.latitude, location.longitude, location.icon));
+                }
             }
+            else { return; }
 
                 
         }
