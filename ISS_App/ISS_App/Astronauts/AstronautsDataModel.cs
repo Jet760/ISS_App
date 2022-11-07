@@ -10,8 +10,7 @@ namespace ISS_App.Astronauts
     internal class AstronautsDataModel
     {
         PeopleInSpaceAPI.Rootobject AstronautAPI = new PeopleInSpaceAPI.Rootobject();
-        public async         Task
-GetAPI()
+        public async Task GetAPIAsync()
         {
             var client = new HttpClient();
             var response = await client.GetAsync("http://api.open-notify.org/astros.json");
@@ -22,7 +21,7 @@ GetAPI()
 
         public async Task<PeopleInSpaceAPI.Person[]> GetPeopleListAsync()
         {
-            await GetAPI();
+            await GetAPIAsync();
             return AstronautAPI.people;
         }
     }

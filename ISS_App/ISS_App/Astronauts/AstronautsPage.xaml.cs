@@ -20,12 +20,12 @@ namespace ISS_App
         public AstronautsPage()
         {
             InitializeComponent();
-            PopulateUI();
+            PopulateUIAsync();
             
         }
         
 
-        public async void PopulateUI()
+        public async void PopulateUIAsync()
         {
             PeopleInSpaceAPI.Person[] peopleList = await controller.GetPeopleListAsync();
             int peopleCounter = 0;
