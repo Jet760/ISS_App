@@ -27,13 +27,10 @@ namespace ISS_App
 
         public async void PopulateUI()
         {
-            Console.WriteLine("V populate");
             PeopleInSpaceAPI.Person[] peopleList = await controller.GetPeopleListAsync();
-            Console.WriteLine(peopleList);
             int peopleCounter = 0;
             foreach (PeopleInSpaceAPI.Person astro in peopleList)
             {
-                Console.WriteLine("V adding to stack");
                 stackLayoutAstronauts.Children.Add(new AstronautView(astro.name, astro.craft));
                 peopleCounter++;
 

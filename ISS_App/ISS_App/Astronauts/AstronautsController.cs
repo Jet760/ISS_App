@@ -11,9 +11,7 @@ namespace ISS_App.Astronauts
 
         public async Task<PeopleInSpaceAPI.Person[]> GetPeopleListAsync()
         {
-            Console.WriteLine("C getpeople");
             PeopleInSpaceAPI.Person[] list = await model.GetPeopleListAsync();
-            Console.WriteLine(list);
             return list;
         }
     }
