@@ -1,50 +1,84 @@
-﻿using System;
+﻿using ISS_App.Notifications;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
+using Xamarin.Forms.Maps;
 
 namespace ISS_App.Home
 {
     internal class HomeController
     {
+        // initialize the data model class
         HomeDataModel model = new HomeDataModel();
-
-        double latitude = 0;
-        double longitude = 0;
-        double altitude = 0;
-        double velocity = 0;
 
         public HomeController()
         {
-            UpdateTelemData();
+            
         }
 
-        private void UpdateTelemData()
+        /// <summary>
+        /// Gets the telemetry data for the space station from the model class and assigns them to the variables. Async method
+        /// </summary>
+        /// <returns></returns>
+        public async Task<(double latitude, double longitude, double altitude, double velocity)> GetTelemDataAsync()
         {
-            latitude = model.GetLatitude();
-            longitude = model.GetLongitude();
-            altitude = model.GetAltitude();
-            velocity = model.GetVelocity();
+            // Get data from the model
+            var telemData = await model.GetTelemDataAsync();
+
+            // Assign data to variables
+            double latitude = telemData.latitude;
+            double longitude = telemData.longitude;
+            double altitude = telemData.altitude;
+            double velocity = telemData.velocity;
+
+            // pass data back
+            return (latitude, longitude, altitude, velocity);
         }
 
-        public double GetLatitude()
+
+        /// <summary>
+        /// Gets list of locations and creates a list of pins based on it. Returns null if no locations to make pins of. Async method
+        /// </summary>
+        /// <returns>List<Pin></returns>
+        public async Task<List<Pin>> GetPinListAsync()
         {
-            UpdateTelemData();
-            return latitude;
-        }
-        public double GetLongitude()
-        {
-            UpdateTelemData();
-            return longitude;
-        }
-        public double GetAltitude()
-        {
-            UpdateTelemData();
-            return altitude;
-        }
-        public double GetVelocity()
-        {
-            UpdateTelemData();
-            return velocity;
+            // New list to store the pins
+            List<Pin> pinList = new List<Pin>();
+
+            // Get notif list from the file
+            List<NotificationClass.Notification> notifList = await ((App)App.Current).fileService.GetNotifListAsync();
+            if (notifList != null)
+            {
+                foreach (NotificationClass.Notification notification in notifList)
+                {
+                    try
+                    {
+                        // Make a new pin with the data from the current notif
+                        double latitude = Convert.ToDouble(notification.latitude);
+                        double longitude = Convert.ToDouble(notification.longitude);
+
+                        Pin pin = new Pin
+                        {
+                            Label = notification.name,
+                            Type = PinType.Generic,
+                            Position = new Position(latitude, longitude)
+                        };
+                        // Add the current new pin to the list
+                        pinList.Add(pin);
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }
+                return pinList;
+            }
+            else
+            {
+                return null;
+            }
+            
         }
     }
 }

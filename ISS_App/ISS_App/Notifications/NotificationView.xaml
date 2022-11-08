@@ -18,6 +18,7 @@
                         <Label Text="Longitude: " TextColor="White" FontSize="Medium" Padding="5"/>
                         <Label x:Name="labelLongitude" TextColor="White" FontSize="Medium" Padding="5"/>
                     </StackLayout>
+                    <!--  THESE FEATURES WILL BE ADDED IN THE FUTURE
                     <StackLayout Orientation="Horizontal">
                         <Label Text="Country: " TextColor="White" FontSize="Medium" Padding="5"/>
                         <Label x:Name="labelCountry" TextColor="White" FontSize="Medium" Padding="5"/>
@@ -26,7 +27,7 @@
                         <Label Text="Notifications: " TextColor="White" FontSize="Medium" Padding="5"/>
                         <Switch x:Name="switchNotifications" Scale="1.3" VerticalOptions="Center" OnColor="#C269C5" ThumbColor="White" />
                     </StackLayout>
-                    <Button Text="Delete location" TextColor="White" BackgroundColor="#484848" BorderColor="#B9BBBE" BorderWidth="1" Margin="20" Clicked="Button_Clicked"/>
+                    <Button Text="Delete location" TextColor="White" BackgroundColor="#484848" BorderColor="#B9BBBE" BorderWidth="1" Margin="20" Clicked="Button_Clicked"/>-->
                 </StackLayout>
             </StackLayout>
         </Frame>

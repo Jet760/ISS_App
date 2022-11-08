@@ -22,6 +22,7 @@ namespace ISS_App
             
         }
 
+        /* BUTTON TO BE ADDED IN FUTURE
         private void Button_Clicked(object sender, EventArgs e)
         {
             //stackLayoutLocationNotifs.Children.Remove(labelLocationName);//
@@ -33,7 +34,7 @@ namespace ISS_App
                 NotificationId = 1
             };
             LocalNotificationCenter.Current.Show(notification);
-            return;
-        }
+            return; 
+        }*/
     }
 }
