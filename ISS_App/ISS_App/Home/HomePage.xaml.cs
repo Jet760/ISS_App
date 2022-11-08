@@ -15,22 +15,26 @@ namespace ISS_App
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomePage : ContentPage
     {
+        // initialize the controller class
         HomeController controller = new HomeController();
         bool autoUpdate = true;
 
+        // initialize the pin for the ISS for the map
         Pin pin = new Pin
         {
-            Label = "Internation Space Station",
+            Label = "International Space Station",
             Type = PinType.Generic,
             Position = new Position(0, 0)
-
         };
+
         public HomePage()
         {
             InitializeComponent();
-            mapHomeMap.Pins.Add(pin);
+            
             RefreshUI();
             AutoUpdateUI();
+
+            // Hides the refresh button if the map auto refreshes
             if (autoUpdate)
             {
                 buttonRefresh.IsVisible = false;
@@ -38,36 +42,66 @@ namespace ISS_App
             
         }
 
-
         private void buttonRefresh_Clicked(object sender, EventArgs e)
         {
             RefreshUI();
         }
 
+        /// <summary>
+        /// Updates the UI every 10s to refresh the map. Async method
+        /// </summary>
         private async void AutoUpdateUI()
         {
             while (autoUpdate)
             {
-                await Task.Delay(6000);
+                await Task.Delay(10000);
                 RefreshUI();
             };
         }
 
-        private void RefreshUI()
+        /// <summary>
+        /// Get the data from the API and updates the ISS pin on the map. Async method
+        /// </summary>
+        private async void RefreshUI()
         {
+            // Get telem data from the controller
+            var telemData = await controller.GetTelemDataAsync();
+            double latitude = telemData.latitude;
+            double longitude = telemData.longitude;
+            double altitude = telemData.altitude;
+            double velocity = telemData.velocity;
 
-                double latitude = controller.GetLatitude();
-                double longitude = controller.GetLongitude();
-                double altitude = controller.GetAltitude();
-                double velocity = controller.GetVelocity();
-                Position issPosition = new Position(latitude, longitude);
-                pin.Position = issPosition;
-                pin.Address = $"Altitude: {Math.Round(altitude, 6)}  Velocity: {Math.Round(velocity, 6)}";
-                mapHomeMap.MoveToRegion(MapSpan.FromCenterAndRadius(issPosition, Distance.FromKilometers(4000)));
-                labelLatitude.Text = Math.Round(latitude, 4).ToString();
-                labelLongitude.Text = Math.Round(longitude, 4).ToString();
-                labelAltitude.Text = Math.Round(altitude, 4).ToString();
-                labelVelocity.Text = Math.Round(velocity, 4).ToString();
+            // Update the position of the ISS pin on the map
+            Position issPosition = new Position(latitude, longitude);
+            pin.Position = issPosition;
+
+            // Add some data to the pin to be displayed when it is tapped
+            pin.Address = $"Altitude: {Math.Round(altitude, 6)}  Velocity: {Math.Round(velocity, 6)}";
+
+            // Move the view of the map to centre the ISS pin
+            mapHomeMap.MoveToRegion(MapSpan.FromCenterAndRadius(issPosition, Distance.FromKilometers(4000)));
+
+            // Populate the on screen text for the telem data
+            labelLatitude.Text = Math.Round(latitude, 4).ToString();
+            labelLongitude.Text = Math.Round(longitude, 4).ToString();
+            labelAltitude.Text = Math.Round(altitude, 4).ToString();
+            labelVelocity.Text = Math.Round(velocity, 4).ToString();
+
+            // Clear the current pins ready for redrawing
+            mapHomeMap.Pins.Clear();
+            // Add ISS pin to the map
+            mapHomeMap.Pins.Add(pin);
+            // Add the notif location pins
+            List<Pin> pinList = await controller.GetPinListAsync();
+            if (pinList != null)
+            {
+                foreach (Pin pin in pinList)
+                {
+                    mapHomeMap.Pins.Add(pin);
+                }
+            }
+            
+            
 
         }
     }

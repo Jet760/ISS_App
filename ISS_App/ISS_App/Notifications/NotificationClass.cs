@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ISS_App.Notifications
 {
-    internal class NotificationClass
+    public class NotificationClass
     {
         public class Notification
         {

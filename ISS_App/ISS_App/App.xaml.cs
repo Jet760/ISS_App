@@ -6,6 +6,8 @@ namespace ISS_App
 {
     public partial class App : Application
     {
+        public FileServiceClass.FileService fileService = new FileServiceClass.FileService();
+
         public App()
         {
             InitializeComponent();

@@ -12,20 +12,17 @@ namespace ISS_App.Notifications
 
         public async Task AddNotifToFileAsync(string name, string latitude, string longitude, string icon)
         {
-            Console.WriteLine("C ADD TO FILE");
             NotificationClass.Notification newNotif = new NotificationClass.Notification(name, latitude, longitude, icon);
-            await model.AddANotifToFileAsync(newNotif);
+            await model.AddNotifToFileAsync(newNotif);
         }
 
         public async Task<List<NotificationClass.Notification>> GetNotifListAsync()
         {
-            Console.WriteLine("C GET LIST");
             return await model.GetNotifListAsync();
         }
 
         public async void StartUpAsync()
         {
-            Console.WriteLine("C START UP");
             await model.CreateFileAsync();
         }
     }

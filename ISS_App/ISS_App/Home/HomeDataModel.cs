@@ -3,42 +3,48 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ISS_App.Home
 {
     internal class HomeDataModel
     {
+        // initialize the API JSON data class
         WhereTheISSAPI.Rootobject LocationAPI = new WhereTheISSAPI.Rootobject();
 
 
-        public async void GetAPI()
+        /// <summary>
+        /// Calls the where is the ISS API and converts the data into a WhereTheISSAPI.Rootobject object. Async method
+        /// </summary>
+        public async Task GetAPI()
         {
-            var client = new HttpClient();
-            var response = await client.GetAsync("https://api.wheretheiss.at/v1/satellites/25544");
-            var responseString = await response.Content.ReadAsStringAsync();
-            LocationAPI = JsonConvert.DeserializeObject<WhereTheISSAPI.Rootobject>(responseString);
-            
+            try
+            {
+                // Calls the API
+                var client = new HttpClient();
+                var response = await client.GetAsync("https://api.wheretheiss.at/v1/satellites/25544");
+                var responseString = await response.Content.ReadAsStringAsync();
+                Console.WriteLine(responseString);
+
+                // Converts the API JSON into the data class object
+                LocationAPI = JsonConvert.DeserializeObject<WhereTheISSAPI.Rootobject>(responseString);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"ISS API call failed and threw: {ex}");
+                return;
+            }
         }
 
-        public double GetLatitude()
+        /// <summary>
+        /// Gets telemetry data from the API and returns it as a tuple. Async method
+        /// </summary>
+        /// <returns>(double latitude, double longitude, double altitude, double velocity)</returns>
+        public async Task<(double latitude, double longitude, double altitude, double velocity)> GetTelemDataAsync()
         {
-            GetAPI();
-            return LocationAPI.latitude;
+            await GetAPI();
+            return (LocationAPI.latitude, LocationAPI.longitude, LocationAPI.altitude, LocationAPI.velocity);
         }
-        public double GetLongitude()
-        {
-            GetAPI();
-            return LocationAPI.longitude;
-        }
-        public double GetAltitude()
-        {
-            GetAPI();
-            return LocationAPI.altitude;
-        }
-        public double GetVelocity()
-        {
-            GetAPI();
-            return LocationAPI.velocity;
-        }
+
     }
 }

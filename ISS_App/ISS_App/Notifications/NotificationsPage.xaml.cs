@@ -22,15 +22,22 @@ namespace ISS_App
             controller.StartUpAsync();
             
         }
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            await UpdateUIAsync();
+        }
 
         public async Task UpdateUIAsync()
         {
+            stackLayoutLocationNotifs.Children.Clear();
             List<NotificationClass.Notification> notifList = await controller.GetNotifListAsync();
             if (notifList != null)
             {
                 foreach (NotificationClass.Notification location in notifList)
                 {
                     stackLayoutLocationNotifs.Children.Add(new NotificationView(location.name, location.latitude, location.longitude, location.icon));
+
                 }
             }
             else { return; }
@@ -85,6 +92,7 @@ namespace ISS_App
                             }
 
                             await controller.AddNotifToFileAsync(name, latitude, longitude, icon);
+                            await UpdateUIAsync();
                             
                             
                         }
