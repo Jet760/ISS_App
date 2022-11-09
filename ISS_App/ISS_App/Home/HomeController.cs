@@ -20,7 +20,7 @@ namespace ISS_App.Home
         /// <summary>
         /// Gets the telemetry data for the space station from the model class and assigns them to the variables. Async method
         /// </summary>
-        /// <returns></returns>
+        /// <returns>(double latitude, double longitude, double altitude, double velocity)</returns>
         public async Task<(double latitude, double longitude, double altitude, double velocity)> GetTelemDataAsync()
         {
             // Get data from the model
@@ -40,7 +40,7 @@ namespace ISS_App.Home
         /// <summary>
         /// Gets list of locations and creates a list of pins based on it. Returns null if no locations to make pins of. Async method
         /// </summary>
-        /// <returns>List<Pin></returns>
+        /// <returns>List Pin </returns>
         public async Task<List<Pin>> GetPinListAsync()
         {
             // New list to store the pins
