@@ -24,7 +24,6 @@ namespace ISS_App.Home
                 var client = new HttpClient();
                 var response = await client.GetAsync("https://api.wheretheiss.at/v1/satellites/25544");
                 var responseString = await response.Content.ReadAsStringAsync();
-                Console.WriteLine(responseString);
 
                 // Converts the API JSON into the data class object
                 LocationAPI = JsonConvert.DeserializeObject<WhereTheISSAPI.Rootobject>(responseString);
