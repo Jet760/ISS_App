@@ -11,6 +11,7 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="0.5*"/>
                 <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.5*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -26,11 +27,11 @@
                 <Label Text=" Longitude: " FontSize="18" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
                 <Label x:Name="labelLongitude" FontSize="16" TextColor="White" HorizontalOptions="Start" VerticalOptions="Center"/>
             </StackLayout>
-            <StackLayout Orientation="Horizontal" Grid.Row="3" Grid.Column="0" HorizontalOptions="Center">
+            <StackLayout Orientation="Horizontal" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Center">
                 <Label Text="Altitude: " FontSize="18" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
                 <Label x:Name="labelAltitude" FontSize="16" TextColor="White" HorizontalOptions="Start" VerticalOptions="Center"/>
             </StackLayout>
-            <StackLayout Orientation="Horizontal" Grid.Row="3" Grid.Column="1" HorizontalOptions="Start">
+            <StackLayout Orientation="Horizontal" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Center">
                 <Label Text=" Velocity: " FontSize="18" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
                 <Label x:Name="labelVelocity" FontSize="16" TextColor="White" HorizontalOptions="Start" VerticalOptions="Center"/>
             </StackLayout>

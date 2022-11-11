@@ -71,21 +71,40 @@ namespace ISS_App
             double altitude = telemData.altitude;
             double velocity = telemData.velocity;
 
+            // Set the string for the data according to the user preferences
+            string altitudeString = string.Empty;
+            string velocityString = string.Empty;
+
+            string unitOfMeasurement = ((App)App.Current).fileService.CheckUnits();
+            if (unitOfMeasurement == "metric")
+            {
+                altitudeString = Math.Round(altitude, 4).ToString() + " km";
+                velocityString = Math.Round(velocity, 4).ToString() + " km/h";
+            }
+            else
+            {
+                altitudeString = (Math.Round(altitude, 4) / 1.609).ToString() + " miles";
+                velocityString = (Math.Round(velocity, 4) / 1.609).ToString() + " m/h";
+                
+            }
+
             // Update the position of the ISS pin on the map
             Position issPosition = new Position(latitude, longitude);
             pin.Position = issPosition;
 
             // Add some data to the pin to be displayed when it is tapped
-            pin.Address = $"Altitude: {Math.Round(altitude, 6)}  Velocity: {Math.Round(velocity, 6)}";
+            pin.Address = $"Altitude: {altitudeString}  Velocity: {velocityString}";
 
             // Move the view of the map to centre the ISS pin
-            mapHomeMap.MoveToRegion(MapSpan.FromCenterAndRadius(issPosition, Distance.FromKilometers(4000)));
+            int distance = ((App)App.Current).fileService.CheckDistance();
+            mapHomeMap.MoveToRegion(MapSpan.FromCenterAndRadius(issPosition, Distance.FromKilometers(distance)));
 
             // Populate the on screen text for the telem data
             labelLatitude.Text = Math.Round(latitude, 4).ToString();
             labelLongitude.Text = Math.Round(longitude, 4).ToString();
-            labelAltitude.Text = Math.Round(altitude, 4).ToString();
-            labelVelocity.Text = Math.Round(velocity, 4).ToString();
+            labelAltitude.Text = altitudeString;
+            labelVelocity.Text = velocityString;
+
 
             // Clear the current pins ready for redrawing
             mapHomeMap.Pins.Clear();

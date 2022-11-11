@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
+using FileSystem = PCLStorage.FileSystem;
 
 namespace ISS_App
 {
@@ -12,8 +14,11 @@ namespace ISS_App
     {
         public class FileService
         {
-            String folderName = "ISSAppFolder";
-            String filename = "notificationsFile.txt";
+            string folderName = "ISSAppFolder";
+            string filename = "notificationsFile.txt";
+
+            string units = "metric";
+            int distance = 4000;
 
             /// <summary>
             /// Checks if the file and folder exist, and if not creates them. Async method
@@ -90,6 +95,28 @@ namespace ISS_App
                 List<NotificationClass.Notification> notifList = JsonConvert.DeserializeObject<List<NotificationClass.Notification>>(fileContents);
                 // Returns the list of notification objects
                 return notifList;
+            }
+
+            public void UpdateUnits()
+            {
+                units = Preferences.Get("Units", "metric");
+            }
+
+            public string CheckUnits()
+            {
+                UpdateUnits();
+                return units;
+            }
+
+            public void UpdateDistance()
+            {
+                distance = Preferences.Get("Distance", 4000);
+            }
+
+            public int CheckDistance()
+            {
+                UpdateDistance();
+                return distance;
             }
         }
     }
