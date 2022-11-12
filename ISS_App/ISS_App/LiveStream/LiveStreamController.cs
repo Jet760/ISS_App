@@ -9,34 +9,17 @@ namespace ISS_App.LiveStream
 {
     internal class LiveStreamController
     {
+        // initialize the data model class
         LiveStreamDataModel model = new LiveStreamDataModel();
-        string url = string.Empty;
-        string type = string.Empty;
-        string explanation = string.Empty;
 
-        public async Task PopulateDataAsync()
+        /// <summary>
+        /// Gets the type, url and explination data from the model. Async method
+        /// </summary>
+        /// <returns>tuple (string type, string url, string explination)</returns>
+        public async Task<(string type, string url, string explination)> GetDataAsync()
         {
-
-            url = await model.GetUrlAsync();
-            type = await model.GetTypeAsync();
-            explanation = await model.GetExplinationAsync();
+            return await model.GetDataAsync();
         }
 
-        public async Task<string> GetTypeAsync()
-        {
-            await PopulateDataAsync();
-            return type;
-        }
-
-        public async Task<string> GetUrlAsync()
-        {
-            await PopulateDataAsync();
-            return url;
-        }
-        public async Task<string> GetExplinationAsync()
-        {
-            await PopulateDataAsync();
-            return explanation;
-        }
     }
 }

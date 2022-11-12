@@ -15,7 +15,6 @@ namespace ISS_App.Astronauts
         /// <summary>
         /// Calls the people in space API and converts the data into a PeopleInSpaceAPI.Rootobject object. Async method
         /// </summary>
-        /// <returns></returns>
         public async Task GetAPIAsync()
         {
             // Calls the API

@@ -20,7 +20,7 @@ namespace ISS_App.Home
         /// <summary>
         /// Gets the telemetry data for the space station from the model class and assigns them to the variables. Async method
         /// </summary>
-        /// <returns></returns>
+        /// <returns>(double latitude, double longitude, double altitude, double velocity)</returns>
         public async Task<(double latitude, double longitude, double altitude, double velocity)> GetTelemDataAsync()
         {
             // Get data from the model
@@ -40,7 +40,7 @@ namespace ISS_App.Home
         /// <summary>
         /// Gets list of locations and creates a list of pins based on it. Returns null if no locations to make pins of. Async method
         /// </summary>
-        /// <returns>List<Pin></returns>
+        /// <returns>List Pin </returns>
         public async Task<List<Pin>> GetPinListAsync()
         {
             // New list to store the pins
@@ -48,34 +48,40 @@ namespace ISS_App.Home
 
             // Get notif list from the file
             List<NotificationClass.Notification> notifList = await ((App)App.Current).fileService.GetNotifListAsync();
+            // Make sure list isn't empty
             if (notifList != null)
             {
-                foreach (NotificationClass.Notification notification in notifList)
+                // Run through the list of locations
+                foreach (NotificationClass.Notification location in notifList)
                 {
                     try
                     {
-                        // Make a new pin with the data from the current notif
-                        double latitude = Convert.ToDouble(notification.latitude);
-                        double longitude = Convert.ToDouble(notification.longitude);
+                        // Make a new pin with the data from the current location
+                        double latitude = Convert.ToDouble(location.latitude);
+                        double longitude = Convert.ToDouble(location.longitude);
 
                         Pin pin = new Pin
                         {
-                            Label = notification.name,
+                            Label = location.name,
                             Type = PinType.Generic,
                             Position = new Position(latitude, longitude)
                         };
+
                         // Add the current new pin to the list
                         pinList.Add(pin);
                     }
+                    // Catch if either of the converts fails and skip that location
                     catch
                     {
                         continue;
                     }
                 }
+
                 return pinList;
             }
             else
             {
+                // If list is empty return null
                 return null;
             }
             

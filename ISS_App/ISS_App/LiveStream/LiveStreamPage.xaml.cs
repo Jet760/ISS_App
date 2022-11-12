@@ -29,23 +29,30 @@ namespace ISS_App
         /// </summary>
          public async void PopulateUIAsync()
          {
-         string type = await controller.GetTypeAsync();
-         string url = await controller.GetUrlAsync();
+            var data = await controller.GetDataAsync();
+            string type = data.type;
+            string url = data.url;
 
          if (type == "image")
          {
-                
+             // Set the source
              imagePicOfTheDay.Source = url;
+             // Make the picture visible 
              imagePicOfTheDay.Opacity = 100;
 
          }
          else
          {
+             // Set the source
              webViewPicOfTheDay.Source = url;
+             // Make sure the web view shows
              webViewPicOfTheDay.IsEnabled = true;
+             // Hides the image
              imagePicOfTheDay.Opacity = 0;
          }
-             labelExplination.Text = await controller.GetExplinationAsync();
+
+         // populates the explination text
+         labelExplination.Text = data.explination;
         }
     }
 }
