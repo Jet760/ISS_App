@@ -24,5 +24,10 @@ namespace ISS_App.Settings
         {
             model.UpdateDistance(value);
         }
+
+        public void SetPreferences((string theme, string units, bool update, int distance) values)
+        {
+            model.SetPreferences(values);
+        }
     }
 }

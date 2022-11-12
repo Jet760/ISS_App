@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,15 +13,15 @@ namespace ISS_App.Settings
         
         public SettingsDataModel()
         {
-            StartPreferences();
+            Preferences.Set("Distance", 4000);
         }
 
-        private void StartPreferences()
+        public void SetPreferences((string theme, string units, bool update, int distance) values)
         {
-            Preferences.Get("AppTheme", "dark");
-            Preferences.Get("Units", "metric");
-            Preferences.Get("AutoUpdate", true);
-            Preferences.Get("Distance", 4000);
+            Preferences.Set("AppTheme", values.theme);
+            Preferences.Set("Units", values.units);
+            Preferences.Set("AutoUpdate", values.update);
+            Preferences.Set("Distance", values.distance);
         }
         public (string theme, string units, bool update, int distance) GetPreferences()
         {
@@ -28,7 +29,8 @@ namespace ISS_App.Settings
             string units = Preferences.Get("Units", "metric");
             bool update = Preferences.Get("AutoUpdate", true);
             int distance = Preferences.Get("Distance", 4000);
-
+            // DEBUG
+            Console.WriteLine(distance);
             return (theme, units, update, distance);
         }
 

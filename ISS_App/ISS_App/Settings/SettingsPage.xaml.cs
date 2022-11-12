@@ -30,6 +30,8 @@ namespace ISS_App
             string units = preferences.units;
             bool update = preferences.update;
             int distance = preferences.distance;
+            // DEBUG
+            Console.WriteLine(distance);
 
             if (theme == "dark")
             {
@@ -70,11 +72,32 @@ namespace ISS_App
         private void sliderDistance_ValueChanged(object sender, ValueChangedEventArgs e)
         {
             UpdateDistance(Convert.ToInt32(sliderDistance.Value));
-            return;
+            labelDistanceValue.Text = Convert.ToInt32(sliderDistance.Value).ToString();
         }
 
         private void buttonSavePreferences_Clicked(object sender, EventArgs e)
         {
+            string theme = "dark";
+            string units = "metric";
+            bool update = true;
+            int distance = Convert.ToInt32(sliderDistance.Value);
+
+            if (!switchDarkMode.IsToggled)
+            {
+                theme = "light";
+            }
+
+            if (!switchUnitOfMeasurement.IsToggled)
+            {
+                units = "imperial";
+            }
+
+            if (!switchAutoUpdate.IsToggled)
+            {
+                update = false;
+            }
+
+            controller.SetPreferences((theme, units, update, distance));
             RefreshPreferences();
         }
     }
