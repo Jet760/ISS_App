@@ -12,10 +12,24 @@ namespace ISS_App.Settings
     {
         
         public SettingsDataModel()
+        { 
+        }
+
+        /// <summary>
+        /// Restores the app settings to their default values
+        /// </summary>
+        public void ResetDefaultPreferences()
         {
+            Preferences.Set("AppTheme", "dark");
+            Preferences.Set("Units", "metric");
+            Preferences.Set("AutoUpdate", true);
             Preferences.Set("Distance", 4000);
         }
 
+        /// <summary>
+        /// Sets the app preferences from the input tuple
+        /// </summary>
+        /// <param name="values"></param>
         public void SetPreferences((string theme, string units, bool update, int distance) values)
         {
             Preferences.Set("AppTheme", values.theme);
@@ -23,70 +37,34 @@ namespace ISS_App.Settings
             Preferences.Set("AutoUpdate", values.update);
             Preferences.Set("Distance", values.distance);
         }
+
+        /// <summary>
+        /// Gets the app preferences and returns them as a tuple
+        /// </summary>
+        /// <returns>(string theme, string units, bool update, int distance)</returns>
         public (string theme, string units, bool update, int distance) GetPreferences()
         {
             string theme = Preferences.Get("AppTheme", "dark");
             string units = Preferences.Get("Units", "metric");
             bool update = Preferences.Get("AutoUpdate", true);
             int distance = Preferences.Get("Distance", 4000);
-            // DEBUG
-            Console.WriteLine(distance);
             return (theme, units, update, distance);
         }
-
-        public void UpdateAppTheme(string value)
-        {
-            if (value.ToLower() == "dark" || value.ToLower() == "light")
-            {
-                Preferences.Set("AppTheme", value);
-            }
-            else
-            {
-                Console.WriteLine("Setting the theme failed, not dark or light");
-            }
-            
-        }
-        public void UpdateUnits(string value)
-        {
-            if (value.ToLower() == "metric" || value.ToLower() == "imperial")
-            {
-                Preferences.Set("Units", value);
-            }
-            else
-            {
-                Console.WriteLine("Setting the units failed, not metric or imperial");
-            }
-            
-        }
         
-        public void UpdateAutoUpdate(bool value)
-        {
-            if (value == true || value == false)
-            {
-                Preferences.Set("AutoUpdate", value);
-            }
-            else
-            {
-                Console.WriteLine("Setting the auto update failed, not a bool");
-            }
-            
-        }
+        /// <summary>
+        /// Updates the distance in the app's file service so that it can be accessed by the home page
+        /// </summary>
+        /// <param name="value"></param>
         public void UpdateDistance(int value)
         {
             if (value > 100 || value < 10000)
             {
-                Preferences.Set("Distance", value);
                 ((App)App.Current).fileService.UpdateDistance();
-
             }
             else
             {
                 Console.WriteLine("Setting the Distance failed, not in the right int range");
             }
-            
         }
-        
-        
-        
     }
 }

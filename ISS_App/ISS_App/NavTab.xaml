@@ -2,9 +2,9 @@
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:local="clr-namespace:ISS_App;assembly=ISS_App"
-            BarBackgroundColor="#292929"
-            SelectedTabColor="White"
-            UnselectedTabColor="Gray"
+            BarBackgroundColor="{DynamicResource NavigationBarColour}"
+            SelectedTabColor="{DynamicResource SelectedTabColor}"
+            UnselectedTabColor="{DynamicResource UnselectedTabColor}"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             android:TabbedPage.ToolbarPlacement="Top"
             x:Class="ISS_App.NavTab">

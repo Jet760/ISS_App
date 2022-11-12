@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ISS_App.Astronauts;
 using ISS_App.Notifications;
 using PCLStorage;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -47,7 +48,6 @@ namespace ISS_App
                 {
                     // Adds each location to the stack layout as a custom view
                     stackLayoutLocationNotifs.Children.Add(new NotificationView(location.name, location.latitude, location.longitude, location.icon));
-
                 }
             }
             else { return; }
@@ -76,46 +76,13 @@ namespace ISS_App
                     if (longitude != null && latitude != "")
                     {
                         // Popup asks the user to choose one of the icons from a list
-                        string iconOutput = await DisplayActionSheet("Select icon:", "Cancel", null, "House", "Pin", "Globe", "Marker", "Tree", "Heart", "Horse");
-                        if (iconOutput != null)
-                        {
-                            string icon = "";
-                            // Assigns the variable based on the user input
-                            switch (iconOutput){
-                                case "House":
-                                    icon = "house_white";
-                                    break;
-                                case "Pin":
-                                    icon = "pin_white";
-                                    break;
-                                case "Globe":
-                                    icon = "world_white";
-                                    break;
-                                case "Marker":
-                                    icon = "drop_white";
-                                    break;
-                                case "Tree":
-                                    icon = "tree_white";
-                                    break;
-                                case "Heart":
-                                    icon = "heart_white";
-                                    break;
-                                case "Horse":
-                                    icon = "horse_white";
-                                    break;
-                                default:
-                                    icon = "house_white";
-                                    break;
+                        string icon = await DisplayActionSheet("Select icon:", "Cancel", null, "House", "Pin", "Globe", "Marker", "Tree", "Heart", "Horse");
 
-                            }
+                        // Calls the controller to add the new notification to the file
+                        await controller.AddNotifToFileAsync(name, latitude, longitude, icon);
 
-                            // Calls the controller to add the new notification to the file
-                            await controller.AddNotifToFileAsync(name, latitude, longitude, icon);
-                            // Update the UI
-                            await UpdateUIAsync();
-                            
-                            
-                        }
+                        // Update the UI
+                        await UpdateUIAsync();
                     }
                 }
             }

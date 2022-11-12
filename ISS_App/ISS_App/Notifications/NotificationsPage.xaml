@@ -2,9 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ISS_App.NotificationsPage"
-             IconImageSource="bell">
+             IconImageSource="pin_black">
     <ContentPage.Content>
-        <Grid BackgroundColor="#383838" HorizontalOptions="FillAndExpand">
+        <Grid BackgroundColor="{DynamicResource PageBackgroundColour}" HorizontalOptions="FillAndExpand">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="9*" />
@@ -12,7 +12,7 @@
             </Grid.ColumnDefinitions>
             <StackLayout Grid.Column="1">
                 <StackLayout Orientation="Horizontal" Padding="15" HorizontalOptions="Center">
-                    <Button x:Name="buttonAddNewNotif" Text="Add New Location Notification" TextColor="White" Pressed="buttonAddNewNotif_Pressed" BackgroundColor="#484848"/>
+                    <Button x:Name="buttonAddNewNotif" Text="Add New Location" TextColor="{DynamicResource PrimaryTextColour}" FontSize="Medium" Pressed="buttonAddNewNotif_Pressed" BackgroundColor="{DynamicResource ButtonColour}"/>
                 </StackLayout>
                 <ScrollView >
                     <StackLayout x:Name="stackLayoutLocationNotifs"  Spacing="20">

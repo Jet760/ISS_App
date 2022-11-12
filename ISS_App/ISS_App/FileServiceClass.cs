@@ -19,6 +19,7 @@ namespace ISS_App
 
             string units = "metric";
             int distance = 4000;
+            bool autoUpdate = true;
 
             /// <summary>
             /// Checks if the file and folder exist, and if not creates them. Async method
@@ -97,26 +98,58 @@ namespace ISS_App
                 return notifList;
             }
 
+            /// <summary>
+            /// Checks the preferences and updates the units variable with the result
+            /// </summary>
             public void UpdateUnits()
             {
                 units = Preferences.Get("Units", "metric");
             }
 
+            /// <summary>
+            /// Updates the units variable from the preferences and returns it as a string
+            /// </summary> 
+            /// <returns>string units</returns>
             public string CheckUnits()
             {
                 UpdateUnits();
                 return units;
             }
 
+            /// <summary>
+            /// Checks the preferences and updates the distance variable with the result
+            /// </summary>
             public void UpdateDistance()
             {
                 distance = Preferences.Get("Distance", 4000);
             }
 
+            /// <summary>
+            /// Updates the distance variable from the preferences and returns it as an int
+            /// </summary> 
+            /// <returns>int distance</returns>
             public int CheckDistance()
             {
                 UpdateDistance();
                 return distance;
+            }
+
+            /// <summary>
+            /// Checks the preferences and updates the autoUpdate variable with the result
+            /// </summary>
+            public void UpdateAutoUpdate()
+            {
+                autoUpdate = Preferences.Get("AutoUpdate", true);
+            }
+
+            /// <summary>
+            /// Updates the autoUpdate variable from the preferences and returns it as a bool
+            /// </summary> 
+            /// <returns>bool autoUpdate</returns>
+            public bool CheckAutoUpdate()
+            {
+                UpdateAutoUpdate();
+                return autoUpdate;
             }
         }
     }

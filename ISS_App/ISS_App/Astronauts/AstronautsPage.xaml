@@ -4,8 +4,8 @@
              x:Class="ISS_App.AstronautsPage"
              IconImageSource="astronaut">
     <ContentPage.Content>
-        
-            <Grid BackgroundColor="#383838" HorizontalOptions="FillAndExpand">
+
+        <Grid BackgroundColor="{DynamicResource PageBackgroundColour}" HorizontalOptions="FillAndExpand">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="9*" />
@@ -13,8 +13,8 @@
                 </Grid.ColumnDefinitions>
             <StackLayout Grid.Column="1">
                 <StackLayout Orientation="Horizontal" Padding="15" HorizontalOptions="Center">
-                    <Label Text="Number of people in space: " TextColor="White" FontSize="Medium"/>
-                    <Label x:Name="labelNumberOfPeople" TextColor="White" FontSize="Medium"/>
+                    <Label Text="Number of people in space: " TextColor="{DynamicResource PrimaryTextColour}" FontSize="Medium"/>
+                    <Label x:Name="labelNumberOfPeople" TextColor="{DynamicResource PrimaryTextColour}" FontSize="Medium"/>
                 </StackLayout>
                 <ScrollView >
                     <StackLayout x:Name="stackLayoutAstronauts"  Spacing="20">

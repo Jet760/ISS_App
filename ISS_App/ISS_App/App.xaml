@@ -3,6 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ISS_App.App">
     <Application.Resources>
-
+        <ResourceDictionary>
+            <Color x:Key="PageBackgroundColour">#36393f</Color>
+            <Color x:Key="NavigationBarColour">#292929</Color>
+            <Color x:Key="SelectedTabColor">White</Color>
+            <Color x:Key="UnselectedTabColor">Gray</Color>
+            <Color x:Key="ButtonColour">#484848</Color>
+            <Color x:Key="PrimaryTextColour">White</Color>
+            <Color x:Key="SecondaryTextColour">#B9BBBE</Color>
+            <Color x:Key="SwitchColour">#C269C5</Color>
+            <Color x:Key="ThumbColour">White</Color>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
